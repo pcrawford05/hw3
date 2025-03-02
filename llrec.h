@@ -83,8 +83,23 @@ Node* llfilter(Node* head, Comp pred)
     //*********************************************
     // Provide your implementation below
     //*********************************************
-
-
+    if(!head){ //If there are 0 Nodes
+        return NULL;
+    }
+    if(pred(head->val)){ //If node needs to be removed
+        if(head->next == NULL){ // If there is 1 node
+            return NULL;
+        } else { // If there is 2+ nodes, remove node then filter the rest of the list
+            Node* t = head;
+            head = head->next;
+            delete t;
+            head = llfilter(head, pred);
+        }
+    } else {//If doesn't need to be removed, continue filtering list
+        if(head->next != NULL)
+            head->next = llfilter(head->next, pred);
+    }
+    return head; //Return filtered list at each level
 }
 
 #endif
