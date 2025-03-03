@@ -88,6 +88,7 @@ Node* llfilter(Node* head, Comp pred)
     }
     if(pred(head->val)){ //If node needs to be removed
         if(head->next == NULL){ // If there is 1 node
+            delete head;
             return NULL;
         } else { // If there is 2+ nodes, remove node then filter the rest of the list
             Node* t = head;
