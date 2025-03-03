@@ -129,15 +129,15 @@ void Heap<T,PComparator>::pop()
 
   while(lIdx < size()){ // While there are still children
     size_t numChildren = size() > rIdx ? m_ : m_ - 1 - (rIdx - size());
-    size_t tIdx = lIdx + 1; // Temporary Index to iterate, skip first because we look at it outside while
+    size_t tIdx = lIdx; // Temporary Index to iterate
     size_t maxIdx = lIdx;
     T maxPriorityVal = vec_[maxIdx];
      
     //Find child with highest priority
     while(--numChildren > 0){// Pre dec/inc Because we have the first one already
-      if(c_(vec_[tIdx], maxPriorityVal)){
+      if(c_(vec_[++tIdx], maxPriorityVal)){
         maxPriorityVal = vec_[tIdx];
-        maxIdx = tIdx++;
+        maxIdx = tIdx;
       }
     }
     T& currItem = vec_[currIdx];
